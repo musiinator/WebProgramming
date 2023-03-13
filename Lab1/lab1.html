@@ -1,24 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-us">
 	<head>
-		<title>Register</title>
-			<center><font color="white" size="5">Formular de &#238;nscriere Untold 2023!</font><br /></center><br>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<title>Register for Untold 2023 Edition</title>
 	</head>
-	<body background='fundalUntold.jpg' align="center">
+	<body background="https://api.kissfm.ro/resized/content-files/2021/09/18/opening_show_8.jpg">
+			
+		<div>
+		<table style="width:100%">
+        <tr>
+          <th valign="baseline"> <a href="https://untold.com/" target="_blank"><img src="https://static.infomusic.ro/media/2016/01/untold-festival-cel-mai-bun-festival-european.jpg" alt="Untold" width="70px" height="40px" align="right"></a></th>
+        </tr>
+		</table>
+		<br>
+		</div>
+		
+		<table border = "1px" align = "center" style = "width:50%">
+		<tr>
+		<td>
+		<center><p><font color="white" size="5"><b>Formular de &#238;nscriere Untold 2023!</b></font><br><br></p></center>
 		<center>
-			<table border="2" align = "center>
-				<div>
-					<form method="GET">
-							<tr>
-							<td><font color = "white" size = "4"> First Name: <input type = "text" name = "firstname"></td>
-							<td><font color = "white" size = "4"> Last Name: <input type = "text" name = "lastname"></td>
-							</tr>
-							<tr>
-							<td><font color = "white" size = "4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address: <input type = "text" name = "lastname"></td>
-							
-							<td><font color = "white" size = "4">
-								<label for="country">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Country:</label>
-								<select height="200px" name="country" id="country">
+				<form method="GET" action=action.php>
+					<fieldset style="width:765px;height:100px;text-align:center">
+						<legend><font color="white" size="2">Fill in with your informations</font></legend>
+							<font color = "white" size = "4"> First Name: <input type = "text" name = "firstname" maxlength=30></font>
+							&nbsp;
+							<font color = "white" size = "4"> Last Name: <input type = "text" name = "lastname" maxlength=16></font>
+							&nbsp;
+							<font color = "white" size = "4"> Age: <input type = "text" name = "age"></font>
+							<label for="country"><font color = "white" size = "4">Country:</font></label>
+								<select name="country" id="country">
 									<option value = ""> Select your country: </option>
 									<option value = "romania"> Rom&#226;nia </option>
 									<option value = "ucraina"> Ucraina </option>
@@ -31,101 +42,107 @@
 									<option value = "ungaria"> Ungaria </option>
 									<option value = "germania"> Germania </option>
 								</select>
-							</td>
-							</tr>
-							<tr>
-							<td><font color = "white" size = "4">&nbsp;&nbsp;&nbsp;&nbsp;Birthday: <input type = "date" name = "dateofbirth"></font></td>
-							<td><font color = "white" size = "4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender:</font>
+							&nbsp;
+							<font color = "white" size = "4"> Address: <input type = "text" name = "lastname"></font>
+							&nbsp;
+							<font color = "white" size = "4"> Gender:</font>
 							<font color = "white" size = "2"><input type = "radio" name = "gender" value="Male">Male</font>
 							<font color = "white" size = "2"><input type = "radio" name = "gender" value="Female">Female</font>
-							<font color = "white" size = "2"><input type = "radio" name = "gender" value="Other">Other</font>
-							</td>
-							</tr>
-							<tr>
-							<td><font color = "white" size = "4"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:</font> <input type = "email" name = "email" required></td>
-							<td><font color = "white" size = "4"> &nbsp;&nbsp;Password:</font> <input type = "password" name = "password" min=8></td>
-							</tr>
-							<tr>
-							<td align = "center" colspan = "2">
-							<font color = "white" size = "4">Schedule&nbsp;&nbsp;&nbsp;</font><br>
-							</td>
-							</tr>
-							<tr>
-							<td align = "center">
-							<select name="schedule" multiple>
-								<option value="firstday">Thursday - 01.09  14:00-08:00-</option>
-								<option value="secondday">Friday - 02.09  12:00-9:00</option>
-								<option value="thirdday">Saturday - 03.09  13:00-7:00</option>
-								<option value="fourthday">Sunday - 04.09  14:00-10:00</option>
-							</td>
-							<td>
+							<font color = "white" size = "2"><input type = "radio" name = "gender" value="Other" disabled>Other</font>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<font color = "white" size = "4"> Email:</font> <input type = "text" name = "email">
+							&nbsp;
+							<font color = "white" size = "4"> Password:</font> <input type = "password" name = "password" >
+							<br>
+							<font color = "white" size = "4"> Festival preferat:</font> <input type = "text" name = "untold" value = "Untold" readonly>
+					</fieldset>
+				</form>
+				<br>
+				<br>
+				<table border = "1px" width="500">
+					<tr>
+						<td align="center" colspan = "2">
+							<font color = "white" size = "4"><b>Schedule & Info</b></font><br>
+						</td>
+					</tr>
+					<tr>
+						<td align = "center">
+						<select name="schedule" multiple>
+							<option value="firstday">Thursday - 01.09  14:00-08:00-</option>
+							<option value="secondday">Friday - 02.09  12:00-9:00</option>
+							<option value="thirdday">Saturday - 03.09  13:00-7:00</option>
+							<option value="fourthday" selected>Sunday - 04.09  14:00-10:00</option>
+							</select>
+						</td>
+						<td>
 								<table border = "1" align = "center">
 								<tr>
-								<td align = "center">
+									<td align = "center">
 									<font color = "yellow" size="3">Main</font><br>
 									<font color = "white" size="2">Kygo</font><br>
 									<font color = "white" size="2">Steve Aoki</font><br>
-								</td>
-								<td align = "center">
+									</td>
+									<td align = "center">
 									<font color = "yellow" size="3">Alchemy</font><br>
 									<font color = "white" size="2">Bug Mafia</font><br>
 									<font color = "white" size="2">Parazitii</font><br>
-								</td>
-								<td align = "center">
+									</td>
+									<td align = "center">
 									<font color = "yellow" size="3">Galaxy</font><br>
 									<font color = "white" size="2">Mahony</font><br>
 									<font color = "white" size="2">Djeff</font><br>
-								</td>
-								<td align = "center">
+									</td>
+									<td align = "center">
 									<font color = "yellow" size="3">Fortune</font><br>
 									<font color = "white" size="2">Daxson</font><br>
 									<font color = "white" size="2">Marco V</font><br>
-								</td>
+									</td>
 								</tr>
 								</table>
-							</td>
-							</tr>
-							<tr>
-							<td>
-								<font color = "white" size = "2">Terms and conditions:<br>
-								<ol>
-									<li><font color = "white" size = "2">Acces:</font></li>
-										<ul>
-											<li><font color = "white" size = "2">Biletele sunt nominale &#351;i<br> nu pot fi transferate sau rev&#226;ndute.</font></li>
-										</ul>
-									<li><font color = "white" size = "2">Condi&#355;ii de siguran&#355;&#259;:</font></li>
-										<ul>
-											<li><font color = "white" size = "2">Este interzis accesul la festival cu<br> orice tip de obiecte periculoase.</font></li>
-										</ul>
-									<li><font color = "white" size = "2">Comportament &#351;i reguli</font></li>
-										<ul>
-											<li><font color = "white" size = "2">Este interzis&#259; perturbarea lini&#351;tii<br> publice.</font></li>
-										</ul>
-								</font>
-								</ol>
-							</td>
-							<td>
-								<font color = "white" size = "3">Additional info (optional)</font><br><br>
-								<textarea name=message" rows = "9" cols ="32">Hello world!</textarea>
-							</td>
-							</tr>
-							<tr>
-								<td colspan = 2>
-								<input type="checkbox" name="terms"><font color = "white" size = "3">Sunt de acord cu termenii &#351;i condi&#355;iile.</font><br>
-								<input type="checkbox" name="terms"><font color = "white" size = "3">Doresc s&#259; primesc actualiz&#259;ri &#351;i materiale promo&#355;ionale prin email.</font>
-								</td>
-							</tr>	
-					</form>
-				</div>
-			</table>
-			<br>
-			<table bgcolor="black" border="0.2" >
-			<tr>
-			<td>
-			<button onclick="location.reload()">Register!</button>
-			</td>
-			</tr>
-			</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<font color = "white" size = "2"><b>Terms and conditions:</b></font><br>
+							<ol start="1">
+								<li><font color = "white" size = "2">Acces:</font>
+									<ul>
+										<li><font color = "white" size = "2">Biletele sunt nominale &#351;i<br> nu pot fi transferate sau rev&#226;ndute.</font></li>
+									</ul>
+								</li>
+								<li><font color = "white" size = "2">Condi&#355;ii de siguran&#355;&#259;:</font>
+									<ul>
+										<li><font color = "white" size = "2">Este interzis accesul la festival cu<br> orice tip de obiecte periculoase.</font></li>
+									</ul>
+								</li>
+								<li><font color = "white" size = "2">Comportament &#351;i reguli</font>
+									<ul>
+										<li><font color = "white" size = "2">Este interzis&#259; perturbarea lini&#351;tii<br> publice.</font></li>
+									</ul>
+								</li>
+							</ol>
+						</td>
+						<td>
+							<font color = "white" size = "3">Additional info (optional)</font><br><br>
+							<textarea name="message" rows = "9" cols ="32">Hello world!</textarea>
+						</td>
+					</tr>
+				</table>
 		</center>
+		<br>
+		<input type="checkbox" name="terms" checked><font color = "white" size = "3">Sunt de acord cu termenii &#351;i condi&#355;iile.</font><br>
+		<input type="checkbox" name="terms"><font color = "white" size = "3">Doresc s&#259; primesc actualiz&#259;ri &#351;i materiale promo&#355;ionale prin email.</font>
+		<br>
+		<br>
+		<table bgcolor="black" border="0.2" align="center">
+		<tr>
+			<td>
+				<button onclick="location.reload()">Register!</button>
+			</td>
+		</tr>
+		</table>
+		</td>
+		</tr>
+		</table>
 	</body>
 </html>
