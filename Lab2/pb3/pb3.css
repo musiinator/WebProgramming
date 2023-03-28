@@ -1,0 +1,52 @@
+body{
+    margin: 0px;
+}
+
+.header{
+    background-color: red;
+    align-content: center;
+    margin: 0px;
+    padding-bottom: 60px;
+    text-align: center;
+    height: 100px;
+}
+
+.navigation{
+    background-color: yellow;
+    width: 100%;
+    text-decoration: none;
+    height: 25px;
+}
+
+.navigation a{
+    text-decoration: none;
+    color: black;
+    padding-right:40px;
+    padding-left: 10px;
+}
+
+.navigation ul{
+    list-style: none;
+    padding: 5;
+    margin: 0;
+}
+
+.navigation li{
+    display: inline-block;
+}
+
+#view{
+    background-color: green;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    
+}
+
+.footer{
+    background-color: pink;
+    text-align: center;
+    margin: 0px;
+    padding-bottom: 59px;
+    padding-top: 1px;
+    height: 60px;
+}

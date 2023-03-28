@@ -1,0 +1,44 @@
+body{
+    margin: 0px;
+}
+
+.header{
+    background-color: red;
+    align-content: center;
+    margin: 0px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.wrapper{
+    display: flex;
+}
+
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    background-color: yellow;
+    width: 100%;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: black;
+    border-bottom: solid;
+}
+
+#view{
+    background-color: green;
+    padding-bottom: 200px;
+    padding-top: 200px;
+    padding-right: 1500px;
+}
+
+.footer{
+    background-color: pink;
+    margin: 0px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    display: flex;
+}

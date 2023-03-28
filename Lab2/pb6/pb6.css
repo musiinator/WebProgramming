@@ -1,0 +1,46 @@
+#nume
+{
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#prenume{
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+#cnp{
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+
+input{ 
+    width: 590px;
+    padding: 11px;
+    font-family: monospace,'Times New Roman', Times, serif;
+    font-size: x-large;
+    letter-spacing: 42.5px;
+    padding-left: 20px;
+    border: 1px solid black;
+    background: linear-gradient(to left, #2b2525, 1px, transparent 0);
+    background-size: 57px 1px;
+}
+
+
+#numeText{
+    height: 30;
+    width: 757px
+}
+
+#prenumeText{
+    height: 30px;
+    width: 757px
+}
+
+#cnpText{
+    height: 30px;
+    width: 757px;
+}

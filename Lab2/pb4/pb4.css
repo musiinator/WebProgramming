@@ -1,0 +1,148 @@
+#iconlist li{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    top: 0;
+    position: absolute;
+}
+
+#iconlist li{
+    height: 84px;
+}
+
+#iconlist a{
+    height: 84px;
+    display: block;
+}
+
+#facebook {
+    left: 0;
+    width: 84px;
+    background: url('sprite.png') 0 -84px;
+}
+
+#facebook:hover{
+    left: 0;
+    width: 84px;
+    background: url('sprite.png') 0px 0px;
+}
+
+#flikr{
+    left: 84px;
+    width: 84px;
+    background: url('sprite.png') -84px -84px;
+}
+
+#flikr:hover{
+    left: 84px;
+    width: 84px;
+    background: url('sprite.png') -84px 0px;
+}
+
+#basket {
+    left: 168px;
+    width: 84px;
+    background: url('sprite.png') -168px -84px;
+}
+
+#basket:hover{
+    left: 168px;
+    width: 84px;
+    background: url('sprite.png') -168px 0px;
+}
+
+#google{
+    left: 252px;
+    width: 84px;
+    background: url('sprite.png') -252px -84px;
+}
+
+#google:hover{
+    left: 252px;
+    width: 84px;
+    background: url('sprite.png') -252px 0px;
+}
+
+#linkedin {
+    left: 336px;
+    width: 84px;
+    background: url('sprite.png') -336px -84px;
+}
+
+#linkedin:hover{
+    left: 336px;
+    width: 84px;
+    background: url('sprite.png') -336px 0px;
+}
+
+#pinterest{
+    left: 420px;
+    width: 84px;
+    background: url('sprite.png') -420px -84px;
+}
+
+#pinterest:hover{
+    left: 420px;
+    width: 84px;
+    background: url('sprite.png') -420px 0px;
+}
+
+#wifi {
+    left: 504px;
+    width: 84px;
+    background: url('sprite.png') -504px -84px;
+}
+
+#wifi:hover{
+    left: 504px;
+    width: 84px;
+    background: url('sprite.png') -504px 0px;
+}
+
+#skype{
+    left: 588px;
+    width: 84px;
+    background: url('sprite.png') -588px -84px;
+}
+
+#skype:hover{
+    left: 588px;
+    width: 84px;
+    background: url('sprite.png') -588px 0px;
+}
+
+#twitter {
+    left: 672px;
+    width: 84px;
+    background: url('sprite.png') -672px -84px;
+}
+
+#twitter:hover{
+    left: 672px;
+    width: 84px;
+    background: url('sprite.png') -672px 0px;
+}
+
+#visa{
+    left: 756px;
+    width: 84px;
+    background: url('sprite.png') -756px -84px;
+}
+
+#visa:hover{
+    left: 756px;
+    width: 84px;
+    background: url('sprite.png') -756px 0px;
+}
+
+#youtube{
+    left: 840px;
+    width: 84px;
+    background: url('sprite.png') -840px -84px;
+}
+
+#youtube:hover{
+    left: 840px;
+    width: 84px;
+    background: url('sprite.png') -840px 0px;
+}
