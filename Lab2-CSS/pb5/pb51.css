@@ -9,8 +9,7 @@
 #fruits li p {
     position: absolute;
     top: 530px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 40%;
     padding: 0 10px;
     font-size: 20px;
 }
@@ -18,14 +17,12 @@
 #fruits li p1 {
     position: absolute;
     top: 535px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 40%;
     padding: 0 10px;
     font-size: 20px;
 }
 
 #mainDiv{
-    display: inline-block;
     padding: 10px;
     border: 3px solid black;
 }

@@ -1,0 +1,40 @@
+#tableID {
+    border-collapse: collapse;
+    margin: auto;
+    user-select: none;
+}
+td {
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.hidden {
+    background-color: #ccc;
+    color: #ccc;
+}
+
+.matched {
+    background-color: #0f0;
+    color: rgb(0, 0, 0);
+}
+
+.selected {
+    background-color: rgb(255, 162, 0);
+    color: rgb(0, 0, 0);
+}
+
+.background{
+    background: linear-gradient(to bottom, #ffffff, #f6a54e);
+    height: 918px;
+}
+
+h1{
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #000000;
+}

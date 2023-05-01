@@ -1,0 +1,37 @@
+#tableID {
+    border-collapse: collapse;
+    margin: auto;
+    user-select: none;
+}
+td {
+    border: 2px solid black;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.hidden {
+    content-visibility: hidden;
+}
+
+.matched {
+    content-visibility: visible;
+}
+
+.selected {
+    content-visibility: visible;
+}
+
+.background{
+    background: linear-gradient(to bottom, #ffffff, #8855ff);
+    height: 918px;
+}
+
+h1{
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #000000;
+}
