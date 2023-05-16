@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem3-v1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgb(227, 252, 248), #54bb4b);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        button{
+            background-color: transparent;
+            border: 1px solid black;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input{
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+
+        select{
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Create your account!</h1>
+    <br>
+    <div align="center">
+        <label for="id">ID:</label>
+        <select id="id" onchange="showUser(this.value)">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br><br>
+        <div>
+            <label for="nume">Nume:</label>
+            <input type="text" id="nume" name="nume" style="width: 180px;">
+        </div>
+        <br>
+        <div style="padding-right: 18px;">
+            <label for="prenume">Prenume:</label>
+            <input type="text" id="prenume" name="prenume" style="width: 180px;">
+        </div>
+        <br>
+        <div style="padding-right: 11px;">
+            <label for="telefon">Telefon:</label>
+            <input type="text" id="telefon" name="telefon" style="width: 180px;">
+        </div>
+        <br>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" style="width: 180px;">
+        </div>
+        <br><br>
+        <button id="save" onclick="saveUser()">Save</button>
+    </div>
+    
+
+    <script>
+
+        var user = {};
+        var fieldsModified = false;
+
+        function populateFields() {
+            var id = document.getElementById("id").value;
+            document.getElementById("nume").value = user.nume;
+            document.getElementById("prenume").value = user.prenume;
+            document.getElementById("telefon").value = user.telefon;
+            document.getElementById("email").value = user.email;
+            checkFieldsModified();
+        }
+
+        function markFieldsAsModified() {
+            fieldsModified = true;
+            checkFieldsModified();
+        }
+
+        function checkFieldsModified() {
+            var nume = document.getElementById("nume").value;
+            var prenume = document.getElementById("prenume").value;
+            var telefon = document.getElementById("telefon").value;
+            var email = document.getElementById("email").value;
+
+            fieldsModified = nume !== user.nume ||
+                            prenume !== user.prenume ||
+                            telefon !== user.telefon ||
+                            email !== user.email;
+
+            var saveButton = document.getElementById("save");
+            saveButton.disabled = !fieldsModified;
+        }
+
+        function showUser(str) {
+            var xhttp;
+            if (str == "") {
+                document.getElementById("nume").value = "";
+                document.getElementById("prenume").value = "";
+                document.getElementById("telefon").value = "";
+                document.getElementById("email").value = "";
+                return;
+            }
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    user = JSON.parse(this.responseText);
+                    populateFields();
+                }
+            };
+            xhttp.open("GET", "http://localhost/pb3.php?id=" + str, true);
+            xhttp.send();
+        }
+
+        function saveUser() {
+            var id = document.getElementById("id").value;
+            var nume = document.getElementById("nume").value;
+            var prenume = document.getElementById("prenume").value;
+            var telefon = document.getElementById("telefon").value;
+            var email = document.getElementById("email").value;
+
+            var userData = {
+                id: id,
+                nume: nume,
+                prenume: prenume,
+                telefon: telefon,
+                email: email
+            };
+
+            var confirmed = confirm("Are you sure you want to save the changes?");
+            if (confirmed) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "http://localhost/pb3.php", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert("Changes saved!");
+                        fieldsModified = false;
+                        checkFieldsModified();
+                    }
+                };
+                xhttp.send(JSON.stringify(userData));
+            }
+        }
+        document.getElementById("nume").addEventListener("input", markFieldsAsModified);
+        document.getElementById("prenume").addEventListener("input", markFieldsAsModified);
+        document.getElementById("telefon").addEventListener("input", markFieldsAsModified);
+        document.getElementById("email").addEventListener("input", markFieldsAsModified);
+
+    </script>
+</body>
+</html>

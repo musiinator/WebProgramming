@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem2-v2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+                height: 100%;
+            }
+
+            body {
+                background: linear-gradient(to bottom, rgb(250, 234, 215), #ffb25b);
+                margin: 0;
+                overflow: hidden;
+            }
+            button{
+                background-color: transparent;
+                border:1px solid black;
+            }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 align="center">List of clients</h1>
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>Nume</th>
+                <th>Prenume</th>
+                <th>Telefon</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="clientsTableBody" style="text-align: center;"></tbody>
+    </table>
+    <br>
+    <div style="position: absolute;bottom: 750px;left: 48%;">
+        <button style="cursor:pointer" id="prevButton">Prev</button>
+        <button style="cursor:pointer" id="nextButton">Next</button>
+    </div>
+
+    <script>
+        var currentPage = 0;
+        var pageSize = 3;
+        var clients = [];
+
+        function showClients() {
+            var table = $("#clientsTableBody");
+            table.empty();
+
+            var startIndex = currentPage * pageSize;
+            var endIndex = startIndex + pageSize;
+            var pageClients = clients.slice(startIndex, endIndex);
+
+            $.each(pageClients, function (i, client) {
+                var row = $("<tr>");
+                $("<td>").text(client.nume).appendTo(row);
+                $("<td>").text(client.prenume).appendTo(row);
+                $("<td>").text(client.telefon).appendTo(row);
+                $("<td>").text(client.email).appendTo(row);
+                row.appendTo(table);
+            });
+        }
+
+        function prevPage() {
+            $("#nextButton").prop("disabled", false);
+            if (currentPage > 0) {
+                currentPage--;
+                showClients();
+            }
+            if (currentPage == 0) {
+                $("#prevButton").prop("disabled", true);
+            } else {
+                $("#prevButton").prop("disabled", false);
+            }
+        }
+
+        function nextPage() {
+            $("#prevButton").prop("disabled", false);
+            var maxPage = Math.floor((clients.length - 1) / pageSize);
+            if (currentPage < maxPage) {
+                currentPage++;
+                showClients();
+            }
+            if (currentPage == maxPage) {
+                $("#nextButton").prop("disabled", true);
+            } else {
+                $("#nextButton").prop("disabled", false);
+            }
+        }
+
+        function loadClients() {
+            $.ajax({
+                url: "http://localhost/pb2.php",
+                method: "GET",
+                dataType: "json",
+                success: function (response) {
+                    clients = response;
+                    showClients();
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $("#prevButton").prop("disabled", true);
+            loadClients();
+
+            $("#prevButton").click(prevPage);
+            $("#nextButton").click(nextPage);
+        });
+    </script>
+</body>
+</html>

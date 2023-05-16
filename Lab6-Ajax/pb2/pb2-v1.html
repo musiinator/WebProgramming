@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem2-v1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgb(227, 252, 248), #728bfd);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        button{
+            background-color: transparent;
+            border:1px solid black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 align="center">List of clients</h1>
+    <table border="1" align="center">
+        <thead>
+            <tr>
+                <th>Nume</th>
+                <th>Prenume</th>
+                <th>Telefon</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="clientsTableBody" style="text-align: center;"></tbody>
+    </table>
+    <br>
+    <div style="position: absolute;bottom: 750px;left: 48%;">
+        <button style="cursor:pointer" id="prevButton" onclick="prevPage()">Prev</button>
+        <button style="cursor:pointer" id="nextButton" onclick="nextPage()">Next</button>
+    </div>
+
+    <script>
+        var currentPage = 0;
+        var pageSize = 3;
+        var clients = [];
+
+        function showClients() {
+            var table = document.getElementById("clientsTableBody");
+            table.innerHTML = "";
+
+            var startIndex = currentPage * pageSize;
+            var endIndex = startIndex + pageSize;
+            var pageClients = clients.slice(startIndex, endIndex);
+
+            for (var i = 0; i < pageClients.length; i++) {
+                var client = pageClients[i];
+                var row = table.insertRow(i);
+                var numeCell = row.insertCell(0);
+                var prenumeCell = row.insertCell(1);
+                var telefonCell = row.insertCell(2);
+                var emailCell = row.insertCell(3);
+
+                numeCell.innerHTML = client.nume;
+                prenumeCell.innerHTML = client.prenume;
+                telefonCell.innerHTML = client.telefon;
+                emailCell.innerHTML = client.email;
+            }
+        }
+
+        function prevPage() {
+            document.getElementById("nextButton").disabled = false;
+            if (currentPage > 0) {
+                currentPage--;
+                showClients();
+            }
+            if (currentPage == 0) {
+                document.getElementById("prevButton").disabled = true;
+            } else {
+                document.getElementById("prevButton").disabled = false;
+            }
+        }
+
+        function nextPage() {
+            document.getElementById("prevButton").disabled = false;
+            var maxPage = Math.floor((clients.length - 1) / pageSize);
+            if (currentPage < maxPage) {
+                currentPage++;
+                showClients();
+            }
+            if (currentPage == maxPage) {
+                document.getElementById("nextButton").disabled = true;
+            } else {
+                document.getElementById("nextButton").disabled = false;
+            }
+        }
+
+        function loadClients() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    clients = JSON.parse(this.responseText);
+                    showClients();
+                }
+            };
+            xhttp.open("GET", "http://localhost/pb2.php", true);
+            xhttp.send();
+        }
+
+        window.onload = function() {
+            document.getElementById("prevButton").disabled = true;
+            loadClients();
+        };
+    </script>
+</body>
+</html>

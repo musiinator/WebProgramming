@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problema4-v2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgb(255, 255, 255), #3bbdf0);
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            border: 5px solid black;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        td:hover {
+            background-color: #4fd6ff;
+        }
+
+        .highlight {
+            background-color: #be9bff !important;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <h1 style="font-size: 40px; text-align: center;">Tic Tac Toe</h1>
+    <table>
+        <tr>
+            <td id="0"></td>
+            <td id="1"></td>
+            <td id="2"></td>
+        </tr>
+        <tr>
+            <td id="3"></td>
+            <td id="4"></td>
+            <td id="5"></td>
+        </tr>
+        <tr>
+            <td id="6"></td>
+            <td id="7"></td>
+            <td id="8"></td>
+        </tr>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var gameOver = false;
+            var clickable = true;
+            var cells = $("td");
+
+            var computerStarted = Math.random() >= 0.5;
+            if (computerStarted) {
+                computerMove();
+            }
+
+            cells.on("click", function() {
+                if (!gameOver && clickable && !$(this).text()) {
+                    if (computerStarted) {
+                        $(this).text("O");
+                    } else {
+                        $(this).text("X");
+                    }
+                    $(this).css("background-color", "#4fd6ff");
+                    checkForWin();
+
+                    if (!gameOver) {
+                        clickable = false;
+                        computerMove();
+                    }
+                }
+            });
+
+            function checkForWin() {
+                var board = getBoard();
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/pb4-win.php",
+                    data: { board: board },
+                    success: function(response) {
+                        if (response !== "") {
+                            gameOver = true;
+                            var winningCells = JSON.parse(response);
+                            console.log(winningCells);
+                            var validCells = winningCells.filter(function(cellIndex) {
+                                return cellIndex >= 0 && cellIndex < cells.length;
+                            });
+                            validCells.forEach(function(cellIndex) {
+                                cells.eq(cellIndex).addClass("highlight");
+                            });
+                            setTimeout(function() {
+                                alert(cells.eq(winningCells[0]).html() + " won the game!");
+                                location.reload();
+                            }, 400);
+                        } else if (board.indexOf("-") === -1) {
+                            gameOver = true;
+                            setTimeout(function() {
+                                alert("It's a draw!");
+                                location.reload();
+                            }, 400);
+                        }
+                    }
+                });
+            }
+
+            function computerMove() {
+                setTimeout(function() {
+                    var board = getBoard();
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/pb4.php",
+                        data: { board: board },
+                        success: function(response) {
+                            if (response === "Game over") {
+                                if (!gameOver) {
+                                    gameOver = true;
+                                    setTimeout(function() {
+                                        alert("It's a draw!");
+                                        location.reload();
+                                    }, 400);
+                                }
+                            } else {
+                                var index = parseInt(response);
+                                var cell = cells.eq(index);
+                                if (cell && !gameOver) {
+                                    if (!computerStarted) {
+                                        cell.text("O");
+                                    } else {
+                                        cell.text("X");
+                                    }
+                                    cell.css("background-color", "#4fd6ff");
+                                    checkForWin();
+                                }
+                            }
+                            clickable = true;
+                        }
+                    });
+                }, 400);
+            }
+
+            function getBoard() {
+                var board = "";
+                cells.each(function() {
+                    board += $(this).text() || "-";
+                });
+                return board;
+            }
+        });
+    </script>
+</body>
+</html>

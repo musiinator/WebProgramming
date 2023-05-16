@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem6-v1</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgb(252, 242, 251), #7bff82);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        select {
+            background-color: transparent;
+        }
+
+        select:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        table {
+            margin-top: 70px;
+            border: 1px solid black;
+            background-color: transparent;
+        }
+
+        table, th, td {
+            text-align: center;
+            border: 1px solid black;
+            background-color: transparent;
+        }
+
+        button {
+            background-color: transparent;
+            border: 1px solid black;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 align="center">Filter items</h1>
+    <br>
+    <div>
+        <label for="producator">Producator:</label>
+        <select id="producator"></select>
+        <br><br>
+        <label for="procesor">Procesor:</label>
+        <select id="procesor"></select>
+        <br><br>
+        <label for="memorie">Memorie:</label>
+        <select id="memorie"></select>
+        <br><br>
+        <label for="capacitate">Capacitate(SSD):</label>
+        <select id="capacitate"></select>
+        <br><br>
+        <label for="placavideo">Placa Video:</label>
+        <select id="placavideo"></select>
+        <br><br>
+        <button onclick="update()">Filtrare</button>
+    </div>
+
+    <table id="items" align="center">
+
+    </table>
+    <script>
+        var components = [];
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                components = JSON.parse(this.responseText);
+                populateComboBoxes();
+            }
+        };
+        xhttp.open("GET", "http://localhost/pb6.php?", true);
+        xhttp.send();
+
+        function populateComboBoxes() {
+            var producatorSelect = document.getElementById("producator");
+            var procesorSelect = document.getElementById("procesor");
+            var memorieSelect = document.getElementById("memorie");
+            var capacitateSelect = document.getElementById("capacitate");
+            var placavideoSelect = document.getElementById("placavideo");
+
+            var producatorValues = [];
+            var procesorValues = [];
+            var memorieValues = [];
+            var capacitateValues = [];
+            var placavideoValues = [];
+
+            for (var i = 0; i < components.length; i++) {
+                var component = components[i];
+                if (!producatorValues.includes(component.producator)) {
+                    producatorValues.push(component.producator);
+                    var option = document.createElement("option");
+                    option.text = component.producator;
+                    producatorSelect.add(option);
+                }
+                if (!procesorValues.includes(component.procesor)) {
+                    procesorValues.push(component.procesor);
+                    var option = document.createElement("option");
+                    option.text = component.procesor;
+                    procesorSelect.add(option);
+                }
+                if (!memorieValues.includes(component.memorie)) {
+                    memorieValues.push(component.memorie);
+                    var option = document.createElement("option");
+                    option.text = component.memorie;
+                    memorieSelect.add(option);
+                }
+                if (!capacitateValues.includes(component.capacitate)) {
+                    capacitateValues.push(component.capacitate);
+                    var option = document.createElement("option");
+                    option.text = component.capacitate;
+                    capacitateSelect.add(option);
+                }
+                if (!placavideoValues.includes(component.placavideo)) {
+                    placavideoValues.push(component.placavideo);
+                    var option = document.createElement("option");
+                    option.text = component.placavideo;
+                    placavideoSelect.add(option);
+                }
+            }
+        }
+
+        function update() {
+            var producator = document.getElementById("producator").value;
+            var procesor = document.getElementById("procesor").value;
+            var memorie = document.getElementById("memorie").value;
+            var capacitate = document.getElementById("capacitate").value;
+            var placavideo = document.getElementById("placavideo").value;
+
+        
+            var sendData = {
+                producator: producator,
+                procesor: procesor,
+                memorie: memorie,
+                capacitate: capacitate,
+                placavideo: placavideo
+            };
+
+            var url = "http://localhost/pb6-update.php";
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", url, true);
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var response = this.responseText;
+                    var table = document.getElementById("items");
+                    table.innerHTML = response;
+                }
+            };
+            xhttp.send(JSON.stringify(sendData));
+        }
+
+
+    </script>
+</body>
+</html>

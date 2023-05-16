@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem3-v2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgb(227, 252, 248), #9447b8);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        button{
+            background-color: transparent;
+            border: 1px solid black;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input{
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+
+        select{
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 align="center">Create your account!</h1>
+    <br>
+    <div align="center">
+        <label for="id">ID:</label>
+        <select id="id">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br><br>
+        <div>
+            <label for="nume">Nume:</label>
+            <input type="text" id="nume" name="nume" style="width: 180px;">
+        </div>
+        <br>
+        <div style="padding-right: 18px;">
+            <label for="prenume">Prenume:</label>
+            <input type="text" id="prenume" name="prenume" style="width: 180px;">
+        </div>
+        <br>
+        <div style="padding-right: 11px;">
+            <label for="telefon">Telefon:</label>
+            <input type="text" id="telefon" name="telefon" style="width: 180px;">
+        </div>
+        <br>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" style="width: 180px;">
+        </div>
+        <br><br>
+        <button id="save">Save</button>
+    </div>
+
+    <script>
+
+        var user = {};
+        var fieldsModified = false;
+
+        function populateFields() {
+            var id = $("#id").val();
+            $("#nume").val(user.nume);
+            $("#prenume").val(user.prenume);
+            $("#telefon").val(user.telefon);
+            $("#email").val(user.email);
+            checkFieldsModified();
+        }
+
+        function markFieldsAsModified() {
+            fieldsModified = true;
+            checkFieldsModified();
+        }
+
+        function checkFieldsModified() {
+            var nume = $("#nume").val();
+            var prenume = $("#prenume").val();
+            var telefon = $("#telefon").val();
+            var email = $("#email").val();
+
+            fieldsModified = nume !== user.nume ||
+                            prenume !== user.prenume ||
+                            telefon !== user.telefon ||
+                            email !== user.email;
+
+            $("#save").prop("disabled", !fieldsModified);
+        }
+
+        function showUser(str) {
+            if (str === "") {
+                $("#nume, #prenume, #telefon, #email").val("");
+                return;
+            }
+
+            $.ajax({
+                url: "http://localhost/pb3.php?id=" + str,
+                type: "GET",
+                success: function(response) {
+                    user = JSON.parse(response);
+                    populateFields();
+                }
+            });
+        }
+
+        function saveUser() {
+            var id = $("#id").val();
+            var nume = $("#nume").val();
+            var prenume = $("#prenume").val();
+            var telefon = $("#telefon").val();
+            var email = $("#email").val();
+
+            var userData = {
+                id: id,
+                nume: nume,
+                prenume: prenume,
+                telefon: telefon,
+                email: email
+            };
+
+            var confirmed = confirm("Are you sure you want to save the changes?");
+            if (confirmed) {
+                $.ajax({
+                    url: "http://localhost/pb3.php",
+                    type: "POST",
+                    data: JSON.stringify(userData),
+                    contentType: "application/json",
+                    success: function(response) {
+                        alert("Changes saved!");
+                        fieldsModified = false;
+                        checkFieldsModified();
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function() {
+            $("#id").on("change", function() {
+                showUser($(this).val());
+            });
+            $("#nume, #prenume, #telefon, #email").on("input", function() {
+                markFieldsAsModified();
+            });
+            $("#save").on("click", function() {
+                saveUser();
+            });
+        });
+
+    </script>
+</body>
+</html>
+

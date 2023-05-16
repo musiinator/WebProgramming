@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Problem5-v2</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgb(255, 234, 253), #ff7bc8);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        ul {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        li {
+            list-style-type: none;
+            font-size: 25px;
+        }
+
+        #fileContent {
+            margin-left: 40px;
+        }
+
+        #fileContent textarea::-webkit-scrollbar {
+            width: 10px;
+            background-color: transparent;
+        }
+
+        #fileContent textarea::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+
+
+        #fileContent textarea {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 600px;
+            height: 550px;
+            font-size: 14px;
+            background-color: transparent;
+            resize: none;
+            border: none;
+            font-family: Monaco, Consolas, 'Courier New', monospace;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 align="center">Tree-View</h1>
+    <br>
+    <div id="container">
+        <div id="directories"></div>
+        <div id="fileContent"></div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "http://localhost/pb5.php",
+                method: "GET",
+                success: function(response) {
+                    $("#directories").html(response);
+                }
+            });
+        });
+
+        function openDirectory(id) {
+            var directory = $("#" + id);
+
+            if (directory.attr("data-loaded") === "true") {
+                directory.find("ul").hide();
+                directory.attr("data-loaded", "false");
+            }
+
+            $.ajax({
+                url: "http://localhost/pb5-directory.php?id=" + id,
+                method: "GET",
+                success: function(response) {
+                    directory.append(response);
+                    directory.attr("data-loaded", "true");
+                }
+            });
+        }
+
+        function openFile(id, event) {
+            var fileContent = $("#fileContent");
+
+            $.ajax({
+                url: "http://localhost/pb5-file.php?id=" + id,
+                method: "GET",
+                success: function(response) {
+                    fileContent.html('<textarea>' + response + '</textarea>');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
